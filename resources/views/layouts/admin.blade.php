@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  @stack('title')
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -25,14 +25,16 @@
   <link rel="stylesheet" href="{{asset('public/backend')}}/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('public/backend')}}/plugins/summernote/summernote-bs4.min.css">
+  <!-- toastr -->
+  <link rel="stylesheet" href="{{asset('public/backend')}}/plugins/toastr/toastr.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-  <!-- Preloader -->
+  {{-- <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div>
+  </div> --}}
 
  
 
@@ -77,11 +79,54 @@
 <script src="{{asset('public/backend')}}/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="{{asset('public/backend')}}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- toastr -->
+<script src="{{asset('public/backend')}}/plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('public/backend')}}/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{asset('public/backend')}}/dist/js/demo.js"></script>
+{{-- <!-- AdminLTE for demo purposes -->
+<script src="{{asset('public/backend')}}/dist/js/demo.js"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('public/backend')}}/dist/js/pages/dashboard.js"></script>
+
+{{-- -----toaster alert message showing----- --}}
+<script>
+  @if (Session::has('message'))
+      var type = "{{ Session::get('alert-type', 'info') }}"
+      switch (type) {
+          case 'info':
+
+              toastr.options.timeOut = 10000;
+              toastr.info("{{ Session::get('message') }}");
+              var audio = new Audio('audio.mp3');
+              audio.play();
+              break;
+          case 'success':
+
+              toastr.options.timeOut = 10000;
+              toastr.success("{{ Session::get('message') }}");
+              var audio = new Audio('audio.mp3');
+              audio.play();
+
+              break;
+          case 'warning':
+
+              toastr.options.timeOut = 10000;
+              toastr.warning("{{ Session::get('message') }}");
+              var audio = new Audio('audio.mp3');
+              audio.play();
+
+              break;
+          case 'error':
+
+              toastr.options.timeOut = 10000;
+              toastr.error("{{ Session::get('message') }}");
+              var audio = new Audio('audio.mp3');
+              audio.play();
+
+              break;
+      }
+  @endif
+</script>
+
 </body>
 </html>

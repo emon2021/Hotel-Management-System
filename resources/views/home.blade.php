@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 @section('admin_content')
-
+@push('title')
+    <title>Admin|Hotel|Management|System</title>
+@endpush
 
       <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
