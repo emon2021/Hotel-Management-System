@@ -37,13 +37,16 @@
   </div> --}}
 
  
-
+@auth
   @include('layouts.admin-partial.navbar')
   @include('layouts.admin-partial.sidebar')
+@endauth
   
-  @yield('admin_content')
+    @yield('admin_content')
   
+@auth
   @include('layouts.admin-partial.footer')
+@endauth
 
  
   

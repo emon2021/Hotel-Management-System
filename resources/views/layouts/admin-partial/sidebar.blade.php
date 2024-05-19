@@ -14,7 +14,7 @@
           <img src="{{asset('public/backend')}}/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{auth()->user()?->name}}</a>
         </div>
       </div>
 
@@ -98,20 +98,19 @@
           <li class="nav-header">LABELS</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon far fa-circle text-danger"></i>
-              <p class="text">Important</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-circle text-warning"></i>
-              <p>Warning</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
               <i class="nav-icon far fa-circle text-info"></i>
-              <p>Informational</p>
+              <p class="text">Change Password</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+              @csrf
+              @method('DELETE')
+          </form>
+          
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">
+              <i class="nav-icon far fa-circle text-danger"></i>
+              <p>Logout</p>
             </a>
           </li>
         </ul>

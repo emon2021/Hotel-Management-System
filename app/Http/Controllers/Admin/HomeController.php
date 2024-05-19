@@ -70,6 +70,12 @@ class HomeController extends Controller
      
         return back()->with('message', 'Verification link sent!');
     }
+    //  logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect()->route('admin.register.create');
+    }
 
 
 
