@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthenticateUser
+class PreventUser
 {
     /**
      * Handle an incoming request.
@@ -15,11 +15,13 @@ class AuthenticateUser
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check()) {
-            return redirect()->route('admin.login.create');
+        if (auth()->check()) {
+            if(auth()->user()->role == 1)
+            {
+                return redirect()->route('admin.home');
+            }
         }
         $response = $next($request);
-        
         return $response;
     }
 }

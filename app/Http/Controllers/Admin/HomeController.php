@@ -74,9 +74,32 @@ class HomeController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect()->route('admin.register.create');
+        return redirect()->route('admin.login.create');
     }
 
+    //  login.create
+    public function login_create()
+    {
+        return view('admin.auth.login');
+    }
+    //  login
+    public function login(Request $request)
+    {
+        $credential = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+
+        if(Auth::attempt($credential))
+        {
+            return redirect()->route('admin.home');
+        }else{
+            return back()->with([
+                'message'=> 'Invalid Email or Password',
+                'alert-type' => 'error'
+            ]);
+        }
+    }
 
 
 

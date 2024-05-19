@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthenticateUser
+class IsAdmin
 {
     /**
      * Handle an incoming request.
@@ -15,11 +15,10 @@ class AuthenticateUser
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check()) {
-            return redirect()->route('admin.login.create');
+        if(auth()->check())
+        {
+            
         }
-        $response = $next($request);
-        
-        return $response;
+        return $next($request);
     }
 }
