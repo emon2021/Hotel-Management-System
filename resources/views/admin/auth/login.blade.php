@@ -61,8 +61,7 @@
             Login With Google+
           </a>
         </div>
-  
-        <a href="{{route('admin.register.create')}}" class="text-center d-block col-md-12" style="margin-top: 75px; text-align:left !important;">I don't have an account?</a>
+        <a href="{{(Route::has('admin.register.create')) ? route('admin.register.create') : '#'}}" class="text-center d-block col-md-12" style="margin-top: 75px; text-align:left !important;">I don't have an account?</a>
       </div>
       <!-- /.form-box -->
     </div><!-- /.card -->
