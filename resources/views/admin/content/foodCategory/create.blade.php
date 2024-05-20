@@ -12,7 +12,7 @@
             </div>
             <div class="card-body">
 
-                <form action="" method="post">
+                <form action="{{route('admin.food.category.store')}}" id="foodCat" method="post">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="text" name="category_name"
@@ -28,17 +28,15 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="checkbox" style="width: 1.5rem" name="category_status" value="1" class="">
+                    <div class=" mb-3">
+                        <input type="checkbox" style="width: 1.5rem;height:1.5rem" name="category_status" value="1">
                         <span  style="font-size:1.5rem; margin-left:1rem">Active</span>
-                        
-                        </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="margin-top:-2.2rem;padding-bottom:1rem">
                         <!-- /.col -->
                         <div class="col-8"></div>
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                            <button type="submit" class="btn btn-primary btn-block" style="width: 9.7rem">ADD</button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -49,4 +47,37 @@
             </div><!-- /.card -->
         </div>
         <!-- /.register-box -->
+    </div>
     @endsection
+
+@push('scripts')
+
+<script>
+    $(document).ready(function() {
+        $('body').on('submit','#foodCat',function(e){
+            e.preventDefault();
+
+            let get_route = $(this).attr('action');
+            let form_data = new FormData($(this)[0]);
+            $.ajax({
+                url:get_route,
+                type:'POST',
+                data:form_data,
+                processData: false,
+                contentType: false,
+                success:function(response){
+                   toastr.success(response);
+                   $('#foodCat')[0].reset();
+                },
+                error:function(xhr,status,failed){
+                    let errors = xhr.responseJSON.errors;
+                    $.each(errors, function(key, value){
+                       toastr.error(value[0]);
+                    });
+                },
+            });
+        });
+    });
+</script>
+
+@endpush

@@ -44,15 +44,16 @@
   
     @yield('admin_content')
   
-@auth
-  @include('layouts.admin-partial.footer')
-@endauth
+
 
  
   
 
 </div>
 <!-- ./wrapper -->
+@auth
+  @include('layouts.admin-partial.footer')
+@endauth
 
 <!-- jQuery -->
 <script src="{{asset('public/backend')}}/plugins/jquery/jquery.min.js"></script>
@@ -94,42 +95,34 @@
 {{-- -----toaster alert message showing----- --}}
 <script>
   @if (Session::has('message'))
-      var type = "{{ Session::get('alert-type', 'info') }}"
+      var type = "{{ Session::get('alert-type', 'info') }}";
+      var message = "{{ Session::get('message') }}";
+      var audio = new Audio('audio.mp3');
+
+      toastr.options.timeOut = 10000;
+
       switch (type) {
           case 'info':
-
-              toastr.options.timeOut = 10000;
-              toastr.info("{{ Session::get('message') }}");
-              var audio = new Audio('audio.mp3');
-              audio.play();
+              toastr.info(message);
               break;
           case 'success':
-
-              toastr.options.timeOut = 10000;
-              toastr.success("{{ Session::get('message') }}");
-              var audio = new Audio('audio.mp3');
-              audio.play();
-
+              toastr.success(message);
               break;
           case 'warning':
-
-              toastr.options.timeOut = 10000;
-              toastr.warning("{{ Session::get('message') }}");
-              var audio = new Audio('audio.mp3');
-              audio.play();
-
+              toastr.warning(message);
               break;
           case 'error':
-
-              toastr.options.timeOut = 10000;
-              toastr.error("{{ Session::get('message') }}");
-              var audio = new Audio('audio.mp3');
-              audio.play();
-
+              toastr.error(message);
               break;
       }
+
+      audio.play();
   @endif
 </script>
+
+
+
+@stack('scripts')
 
 </body>
 </html>

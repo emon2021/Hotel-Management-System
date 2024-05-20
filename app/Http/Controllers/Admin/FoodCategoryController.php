@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\m;
+use App\Models\FoodCategory;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class FoodCategoryController extends Controller
@@ -29,7 +30,20 @@ class FoodCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'category_name' => 'required|min:3|unique:food_categories',
+        ]);
+
+        $category = new FoodCategory();
+        $category->category_name = $request->category_name;
+        $category->category_slug = Str::slug($request->category_name,'-');
+        if(isset($request->category_status))
+        {
+            $category->category_status = $request->category_status;
+        }
+        $category->save();
+
+        return response()->json('Food Category Added Successfully');
     }
 
     /**
