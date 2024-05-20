@@ -27,3 +27,14 @@ Route::controller(HomeController::class)->group(function() use ($register){
     Route::delete('/admin/logout', 'logout')->name('admin.logout');
 
 });
+
+
+//_________Food.Category.Controller___________
+Route::controller(\App\Http\Controllers\Admin\FoodCategoryController::class)->middleware(['auth'])->group(function(){
+    // Route::get('/admin/food/category', 'index')->name('admin.food.category');
+    Route::get('/admin/food/category/create', 'create')->name('admin.food.category.create');
+    // Route::post('/admin/food/category/store', 'store')->name('admin.food.category.store');
+    // Route::get('/admin/food/category/edit/{id}', 'edit')->name('admin.food.category.edit');
+    // Route::post('/admin/food/category/update/{id}', 'update')->name('admin.food.category.update');
+    // Route::post('/admin/food/category/delete/{id}', 'destroy')->name('admin.food.category.delete');
+});
