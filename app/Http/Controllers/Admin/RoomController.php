@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\RoomCategoryRequest;
+use App\Models\RoomCategory;
+use Illuminate\Support\Str;
 
 class RoomController extends Controller
 {
@@ -17,8 +19,14 @@ class RoomController extends Controller
         return view("admin.content.room_management.categories.create");
      }
      // rooms.category.store
-     public function store()
+     public function store(RoomCategoryRequest $request)
      {
-        
+        $request->validated();
+        RoomCategory::create([
+            "category_name" => $request->category_name,
+            "category_slug" => Str::slug($request->category_name,'-'),
+        ]);
+
+        return response()->json("Room Category Created Successfully");
      }
 }

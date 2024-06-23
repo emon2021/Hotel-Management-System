@@ -43,3 +43,32 @@
         <!-- /.register-box -->
     </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('body').on('submit','#roomsCat',function(e){
+            e.preventDefault();
+            let get_route = $(this).attr('action');
+            let form_data = new FormData($(this)[0]);
+            $.ajax({
+                url:get_route,
+                type:'POST',
+                data:form_data,
+                processData: false,
+                contentType: false,
+                success:function(response){
+                   toastr.success(response);
+                   $('#roomsCat')[0].reset();
+                },
+                error:function(xhr,status,failed){
+                    let errors = xhr.responseJSON.errors;
+                    $.each(errors, function(key, value){
+                       toastr.error(value[0]);
+                    });
+                },
+            });
+        });
+    });
+</script>
+@endpush

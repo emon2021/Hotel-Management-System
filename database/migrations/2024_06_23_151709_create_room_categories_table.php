@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('category_name');
             $table->string('category_slug');
-            $table->integer('category_status'); // 1 is active && 2 is inactive
+            $table->integer('category_status')->default(2); // 1 is active && 2 is inactive
             $table->timestamps();
         });
     }
