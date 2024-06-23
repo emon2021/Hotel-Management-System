@@ -44,6 +44,47 @@
               </p>
             </a>
           </li>
+          <li class="nav-item @if(Request::url() == route('admin.rooms.category.create')) menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Rooms Management
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item ">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Settings</p>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Coupons</p>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Amenities</p>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a href="{{ route('admin.rooms.category.create') }}" class="nav-link @if(Request::url() == route('admin.rooms.category.create')) active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Categories</p>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Rooms</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item @if(Request::url() == route('admin.food.category.create')) menu-is-opening menu-open @endif">
             <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-copy"></i>
@@ -53,8 +94,8 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item @if(Request::url() == route('admin.food.category.create')) active @endif">
-                <a href="{{route('admin.food.category.create')}}" class="nav-link">
+              <li class="nav-item">
+                <a href="{{route('admin.food.category.create')}}" class="nav-link @if(Request::url() == route('admin.food.category.create')) active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Category</p>
                 </a>
