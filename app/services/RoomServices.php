@@ -23,4 +23,22 @@ class RoomServices
         }
         return $roomCat;
     }
+    // rooms.category.edit
+    public static function roomCatEdit($request)
+    {
+        $id = $request->id;
+        $roomCat = RoomCategory::find($id);
+        return $roomCat;
+    }
+    // rooms.category.update
+    public static function roomCatUpdate($request)
+    {
+        $id = $request->id;
+        $roomCat = RoomCategory::find($id);
+        $roomCat->update([
+            "category_name" => $request->category_name,
+            "category_slug" => Str::slug($request->category_name,'-'),
+        ]);
+        return $roomCat;
+    }
 }

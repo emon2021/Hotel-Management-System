@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoomCategoryRequest;
+use App\Http\Requests\RoomCategoryUpdateRequest;
 use App\services\RoomServices;
+use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
@@ -33,5 +35,25 @@ class RoomController extends Controller
         $data['roomCats'] = RoomServices::roomCatIndex();
 
         return view('admin.content.room_management.categories.index',$data);
+     }
+     // rooms.category.edit
+     public function edit(Request $request)  
+     {
+
+        $data = RoomServices::roomCatEdit($request);
+
+        return response()->json($data);
+     }
+     // rooms.category.update
+     public function update(RoomCategoryUpdateRequest $request)  
+     {
+
+        $data = RoomServices::roomCatUpdate($request);
+        
+
+        return response()->json([
+            'message' => 'Room Category Updated Successfully',
+            'data' => $data->category_name
+        ]);
      }
 }

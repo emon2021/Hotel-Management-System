@@ -44,7 +44,7 @@ Route::controller(\App\Http\Controllers\Admin\RoomController::class)->middleware
     Route::get('/admin/rooms/category', 'index')->name('admin.rooms.category.index');
     Route::get('/admin/rooms/category/create', 'create')->name('admin.rooms.category.create');
     Route::post('/admin/rooms/category/store', 'store')->name('admin.rooms.category.store');
-    // Route::get('/admin/food/category/edit/{id}', 'edit')->name('admin.food.category.edit');
-    // Route::post('/admin/food/category/update/{id}', 'update')->name('admin.food.category.update');
-    // Route::post('/admin/food/category/delete/{id}', 'destroy')->name('admin.food.category.delete');
+    Route::get('/admin/rooms/category/edit', 'edit')->name('admin.rooms.category.edit');
+    Route::post('/admin/rooms/category/update', 'update')->name('admin.rooms.category.update');
+    // Route::post('/admin/rooms/category/delete/{id}', 'destroy')->name('admin.rooms.category.delete');
 });
