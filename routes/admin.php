@@ -41,7 +41,7 @@ Route::controller(\App\Http\Controllers\Admin\FoodCategoryController::class)->mi
 
 //_________Food.Category.Controller___________
 Route::controller(\App\Http\Controllers\Admin\RoomController::class)->middleware(['auth'])->group(function(){
-    // Route::get('/admin/food/category', 'index')->name('admin.food.category');
+    Route::get('/admin/rooms/category', 'index')->name('admin.rooms.category.index');
     Route::get('/admin/rooms/category/create', 'create')->name('admin.rooms.category.create');
     Route::post('/admin/rooms/category/store', 'store')->name('admin.rooms.category.store');
     // Route::get('/admin/food/category/edit/{id}', 'edit')->name('admin.food.category.edit');

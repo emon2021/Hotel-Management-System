@@ -44,7 +44,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item @if(Request::url() == route('admin.rooms.category.create')) menu-is-opening menu-open @endif">
+          <li class="nav-item @if(Request::url() == route('admin.rooms.category.create') || Request::url() == route('admin.rooms.category.index')) menu-is-opening menu-open @endif">
             <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -71,11 +71,27 @@
                   <p>Amenities</p>
                 </a>
               </li>
-              <li class="nav-item ">
-                <a href="{{ route('admin.rooms.category.create') }}" class="nav-link @if(Request::url() == route('admin.rooms.category.create')) active @endif">
+              <li class="nav-item @if(Request::url() == route('admin.rooms.category.create') || Request::url() == route('admin.rooms.category.index')) menu-is-opening menu-open @endif">
+                <a href="#" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Categories</p>
+                  <i class="fas fa-angle-left right"></i>
                 </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item  ">
+                    <a href="{{ route('admin.rooms.category.index') }}" class="nav-link @if(Request::url() == route('admin.rooms.category.index')) active @endif">
+                      <i class="far fa-double-circle nav-icon"></i>
+                      <p>All Category</p>
+                    </a>
+                  </li>
+                  <li class="nav-item  ">
+                    <a href="{{ route('admin.rooms.category.create') }}" class="nav-link @if(Request::url() == route('admin.rooms.category.create')) active @endif">
+                      <i class="far fa-double-circle nav-icon"></i>
+                      <p>Add Category</p>
+                    </a>
+                  </li>
+                  
+                </ul>
               </li>
               <li class="nav-item ">
                 <a href="#" class="nav-link">
