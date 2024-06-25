@@ -41,4 +41,11 @@ class RoomServices
         ]);
         return $roomCat;
     }
+    // rooms.category.destroy
+    public static function roomCatDestroy($id)
+    {
+        $roomCat = RoomCategory::findOrFail($id);
+        $roomCat->delete();
+        return $roomCat;
+    }
 }

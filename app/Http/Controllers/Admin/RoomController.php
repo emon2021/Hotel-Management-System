@@ -23,9 +23,7 @@ class RoomController extends Controller
      public function store(RoomCategoryRequest $request)
      {
         $request->validated();
-
         RoomServices::roomCatStore($request);
-
         return response()->json("Room Category Created Successfully");
      }
      // rooms.category.index
@@ -33,7 +31,6 @@ class RoomController extends Controller
      {
 
         $data['roomCats'] = RoomServices::roomCatIndex();
-
         return view('admin.content.room_management.categories.index',$data);
      }
      // rooms.category.edit
@@ -41,7 +38,6 @@ class RoomController extends Controller
      {
 
         $data = RoomServices::roomCatEdit($request);
-
         return response()->json($data);
      }
      // rooms.category.update
@@ -49,11 +45,15 @@ class RoomController extends Controller
      {
 
         $data = RoomServices::roomCatUpdate($request);
-        
-
         return response()->json([
             'message' => 'Room Category Updated Successfully',
             'data' => $data->category_name
         ]);
+     }
+     // rooms.category.destroy
+     public function destroy($id)  
+     {
+        RoomServices::roomCatDestroy($id);
+        return response()->json("Room Category Deleted Successfully");
      }
 }

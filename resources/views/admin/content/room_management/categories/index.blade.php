@@ -36,7 +36,7 @@
                                 <a href="#" id="edit" data-id="{{ $roomCat->id }}" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <i class="fas fa-edit"></i>
                                 </a> 
-                                <a href="" class="btn btn-danger">
+                                <a href="{{ route("admin.rooms.category.destroy",$roomCat->id) }}" class="delete btn btn-danger">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -86,7 +86,11 @@
                     </div>
                     </div>
                 </div>
-  
+                
+                <form action="" method="post" id="delete">
+                    @csrf
+                    @method('DELETE')
+                </form>
 
             </div>
 
@@ -147,6 +151,42 @@
                 },
             });
         });
+
+        //  deleting data
+        $('body').on('click','.delete',function(e){
+            e.preventDefault();
+            let get_route = $(this).attr('href');
+            let set_route = $('#delete').attr('action',get_route);
+            $('#delete').submit();
+
+            $(this).parent().parent().remove();
+            
+        });
+
+        $('#delete').submit(function(event){
+            event.preventDefault();
+            let get_route = $(this).attr('action');
+            let form_data = new FormData($(this)[0]);
+            $.ajax({
+                url:get_route,
+                type:'post',
+                data:form_data,
+                async: false,
+                contentType: false,
+                processData: false,
+                success:function(response){
+                   toastr.success(response);
+                   // reloading table
+                },
+                error:function(xhr,status,failed){
+                    let errors = xhr.responseJSON.errors;
+                    $.each(errors, function(key, value){
+                       toastr.error(value[0]);
+                    });
+                },
+            });
+        });
+        
     });
 </script>
 @endpush
