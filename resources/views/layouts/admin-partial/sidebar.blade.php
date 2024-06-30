@@ -44,7 +44,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item @if(Request::url() == route('admin.rooms.category.create') || Request::url() == route('admin.rooms.category.index')) menu-is-opening menu-open @endif">
+          <li class="nav-item @if(Request::url() == route('admin.rooms.category.create') || Request::url() == route('admin.rooms.category.index') || Request::url() == route('amenity.index')) menu-is-opening menu-open @endif">
             <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -66,7 +66,7 @@
                 </a>
               </li>
               <li class="nav-item ">
-                <a href="#" class="nav-link">
+                <a href="{{ route('amenity.index') }}" class="nav-link @if(Request::url() == route('amenity.index')) active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Amenities</p>
                 </a>

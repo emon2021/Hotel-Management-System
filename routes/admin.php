@@ -49,3 +49,12 @@ Route::controller(\App\Http\Controllers\Admin\RoomController::class)->middleware
     Route::delete('/admin/rooms/category/destroy/{id}', 'destroy')->name('admin.rooms.category.destroy');
     Route::get('/admin/rooms/category/status/{id}', 'statusUpdate')->name('admin.rooms.category.status');
 });
+Route::controller(\App\Http\Controllers\Admin\AmenityController::class)->middleware(['auth'])->group(function(){
+    Route::get('rooms/amenities/index', 'index')->name('amenity.index');
+    // Route::get('rooms/amenities/', 'create')->name('');
+    // Route::post('rooms/amenities/', 'store')->name('');
+    // Route::get('rooms/amenities/', 'edit')->name('');
+    // Route::post('/rooms/amenities/', 'update')->name('');
+    // Route::delete('/admin/rooms/category/destroy/{id}', 'destroy')->name('');
+    // Route::get('rooms/amenities/', 'statusUpdate')->name('');
+});
