@@ -27,10 +27,10 @@
                             <td>{{ $loop->iteration }}</td> <!-----special types of variable for blade file in the loops---->
                             <td class="cat_name">{{ $roomCat->category_name }}</td>
                             <td>
-                                @if($roomCat->status == 1)
-                                    <a href="#" class="btn btn-success">Active</a>
+                                @if($roomCat->category_status == 1)
+                                    <a href="{{ route("admin.rooms.category.status",$roomCat->id) }}" class="statusUpdate btn btn-success">Active</a>
                                 @else
-                                    <a href="#"  class="btn btn-danger">Inactive</a>
+                                    <a href="{{ route("admin.rooms.category.status",$roomCat->id) }}"  class="statusUpdate btn btn-danger">Inactive</a>
                                 @endif
                             <td>
                                 <a href="#" id="edit" data-id="{{ $roomCat->id }}" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -182,6 +182,27 @@
                     let errors = xhr.responseJSON.errors;
                     $.each(errors, function(key, value){
                        toastr.error(value[0]);
+                    });
+                },
+            });
+        });
+
+        //  status updating
+        $('body').on('click','.statusUpdate',function(e){
+            e.preventDefault();
+            let get_route = $(this).attr('href');
+            $.ajax({
+                url: get_route,
+                type: 'get',
+                success: function (response) {
+                    toastr.success(response);
+                    // reloading table
+                    window.location.reload();
+                },
+                error: function (xhr, status, failed) {
+                    let errors = xhr.responseJSON.errors;
+                    $.each(errors, function (key, value) {
+                        toastr.error(value[0]);
                     });
                 },
             });

@@ -56,4 +56,11 @@ class RoomController extends Controller
         RoomServices::roomCatDestroy($id);
         return response()->json("Room Category Deleted Successfully");
      }
+
+     //  rooms.category.statusUpdate
+     public function statusUpdate($id)
+     {
+         RoomServices::roomCatStatus($id);
+         return response()->json("Room Category Status Updated Successfully");
+     }
 }

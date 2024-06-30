@@ -47,4 +47,5 @@ Route::controller(\App\Http\Controllers\Admin\RoomController::class)->middleware
     Route::get('/admin/rooms/category/edit', 'edit')->name('admin.rooms.category.edit');
     Route::post('/admin/rooms/category/update', 'update')->name('admin.rooms.category.update');
     Route::delete('/admin/rooms/category/destroy/{id}', 'destroy')->name('admin.rooms.category.destroy');
+    Route::get('/admin/rooms/category/status/{id}', 'statusUpdate')->name('admin.rooms.category.status');
 });

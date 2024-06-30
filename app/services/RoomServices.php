@@ -48,4 +48,20 @@ class RoomServices
         $roomCat->delete();
         return $roomCat;
     }
+    // rooms.category.status
+    public static function roomCatStatus($id)
+    {
+        $roomCatStatus = RoomCategory::findOrFail($id);
+        if($roomCatStatus->category_status == 1)
+        {
+            $roomCatStatus->update([
+                "category_status" => 2
+            ]);
+        }else{
+            $roomCatStatus->update([
+                "category_status" => 1
+            ]);
+        }
+        return $roomCatStatus;
+    }
 }
