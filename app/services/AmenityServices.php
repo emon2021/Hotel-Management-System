@@ -25,4 +25,12 @@ class AmenityServices
         ]);
         return $amenity;
     }
+
+    //  amenity deleting
+    public static function amenityDestroy($id)
+    {
+        $amenity = RoomAmenity::find($id);
+        $amenity->delete();
+        return $amenity;
+    }
 }

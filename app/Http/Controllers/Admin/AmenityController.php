@@ -22,7 +22,7 @@ class AmenityController extends Controller
                     $actionbtn = '<a href="javascript:void(0)"  data-id="'.$row->id.'" class="btn btn-primary edit" data-bs-target="#editModal" data-bs-toggle="modal" >
                 <i class="fas fa-edit"></i>
               </a>
-              <a href="'.route('amenity.index',$row->id).'" id="delete_data" class="btn btn-danger">
+              <a href="'.route('amenity.destroy',$row->id).'" id="delete_data" class="btn btn-danger">
               <i class="fas fa-trash"></i>
             </a>';
                     return $actionbtn;
@@ -65,5 +65,12 @@ class AmenityController extends Controller
         $request->validated();
         AmenityServices::amenityUpdate($request);
         return response()->json(['success' => 'Amenity Updated Successfully.']);
+    }
+
+    //  amenity deleting
+    public function destroy($id)
+    {
+        AmenityServices::amenityDestroy($id);
+        return response()->json(['success' => 'Amenity Deleted Successfully.']);
     }
 }
