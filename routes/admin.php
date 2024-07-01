@@ -30,7 +30,7 @@ Route::controller(HomeController::class)->group(function() use ($register){
 
 
 //_________Food.Category.Controller___________
-Route::controller(\App\Http\Controllers\Admin\FoodCategoryController::class)->middleware(['auth'])->group(function(){
+Route::controller(\App\Http\Controllers\Admin\FoodCategoryController::class)->middleware(['auth','is_admin'])->group(function(){
     // Route::get('/admin/food/category', 'index')->name('admin.food.category');
     Route::get('/admin/food/category/create', 'create')->name('admin.food.category.create');
     Route::post('/admin/food/category/store', 'store')->name('admin.food.category.store');
@@ -49,12 +49,11 @@ Route::controller(\App\Http\Controllers\Admin\RoomController::class)->middleware
     Route::delete('/admin/rooms/category/destroy/{id}', 'destroy')->name('admin.rooms.category.destroy');
     Route::get('/admin/rooms/category/status/{id}', 'statusUpdate')->name('admin.rooms.category.status');
 });
-Route::controller(\App\Http\Controllers\Admin\AmenityController::class)->middleware(['auth'])->group(function(){
+Route::controller(\App\Http\Controllers\Admin\AmenityController::class)->middleware(['auth','is_admin'])->group(function(){
     Route::get('rooms/amenities/index', 'index')->name('amenity.index');
-    // Route::get('rooms/amenities/', 'create')->name('');
     Route::post('rooms/amenities/store', 'store')->name('amenity.store');
     Route::get('rooms/amenities/edit', 'edit')->name('amenity.edit');
     Route::post('/rooms/amenities/update', 'update')->name('amenity.update');
-    // Route::delete('/admin/rooms/category/destroy/{id}', 'destroy')->name('');
+    Route::delete('/rooms/amenities/destroy/{id}', 'destroy')->name('amenity.destroy');
     // Route::get('rooms/amenities/', 'statusUpdate')->name('');
 });
