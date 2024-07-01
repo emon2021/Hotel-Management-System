@@ -33,4 +33,19 @@ class AmenityServices
         $amenity->delete();
         return $amenity;
     }
+    //  amenity status update
+    public static function amenityStatusUpdate($request)
+    {
+        //dd($request->id);
+        $amenity = RoomAmenity::findOrFail($request->id);
+        //dd($amenity);
+        if ($amenity->amenity_status == 1) {
+            $amenity->amenity_status = 0;
+            $amenity->save();
+        } else {
+            $amenity->amenity_status = 1;
+            $amenity->save();
+        }
+        return $amenity;
+    }
 }

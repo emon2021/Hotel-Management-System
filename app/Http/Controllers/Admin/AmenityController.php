@@ -29,9 +29,9 @@ class AmenityController extends Controller
                 })
                 ->editColumn('amenity_status', function ($row) {
                     if ($row->amenity_status == 1) {
-                        return '<span class="btn btn-success">Active</span>';
+                        return '<span class="amenityStatus btn btn-success" data-id = "'.$row->id.'" >Active</span>';
                     } else {
-                        return '<span class="btn btn-warning">Inactive</span>';
+                        return '<span class="amenityStatus btn btn-warning" data-id = "'.$row->id.'" >Inactive</span>';
                     }
                 })
                 ->rawColumns(['action','amenity_status'])
@@ -72,5 +72,11 @@ class AmenityController extends Controller
     {
         AmenityServices::amenityDestroy($id);
         return response()->json(['success' => 'Amenity Deleted Successfully.']);
+    }
+    //  amenity status changing
+    public function statusUpdate(Request $request)
+    {
+        AmenityServices::amenityStatusUpdate($request);
+        return response()->json(['success' => 'Amenity Status Changed Successfully.']);
     }
 }
