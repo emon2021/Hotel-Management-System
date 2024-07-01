@@ -7,17 +7,18 @@
     <div class="container float-end" style="float:right;width:82%">
         <div class="row overflow-hidden">
             <div class="col-md-12 col-lg-12 col-xl-12">
-                <table id="y_table" class="table table-striped text-center">
+                <table id="yTable" class="table table-striped text-center">
                     <thead>
                         <tr>
                             
-                                <h3 class="table-caption text-center bg-dark text-light p-2">Room Categories</h3>
+                                <h3 class="table-caption text-center bg-dark text-light p-2">Amenities</h3>
                             
                         </tr>
+                        <a href="#" class="btn btn-primary float-end mx-5 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Add  &nbsp;&nbsp; +</a>
                     <tr>
                         <th >SL</th>
-                        <th >Category Name</th>
-                        <th >Category Status</th>
+                        <th >Amenity Name</th>
+                        <th >Amenity Status</th>
                         <th >Action</th>
                     </tr>
                     </thead>
@@ -26,33 +27,69 @@
                     </tbody>
                 </table>
 
-                {{-- edit room category modal --}}
+                {{-- add amenity modal --}}
   
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Room Category</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Add Amenity</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('admin.rooms.category.update') }}" id="roomsCat" method="post">
+                            <form action="{{ route('amenity.store') }}" id="amenityStore" method="post">
                                 @csrf
                                 <div class="input-group mb-3">
                                     <input type="hidden" id="id" name="id">
-                                    <input type="text" name="category_name"
-                                        class="form-control cat_name @error('category_name') is-invalid @enderror"  placeholder="Category Name">
+                                    <input type="text" name="amenity_name"
+                                        class="form-control cat_name @error('amenity_name') is-invalid @enderror"  placeholder="Amenity Name">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-envelope"></span>
                                         </div>
                                     </div>
-                                    @error('category_name')
+                                    @error('amenity_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                </div>
+                                <div class="row" style="padding-bottom:1rem">
+                                    <!-- /.col -->
+                                    <div class="col-8"></div>
+                                    <div class="col-4">
+                                        <button type="submit" class="btn btn-primary btn-block" style="width: 8.7rem; margin-right:0.2rem">ADD</button>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {{-- edit amenity modal --}}
+  
+                <!-- Modal -->
+                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Amenity</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('amenity.update') }}" id="amenityUpdate" method="post">
+                                @csrf
+                                <div class="input-group mb-3">
+                                    <input type="hidden" value="" id="up_id" name="id">
+                                    <input type="text" value="" name="amenity_name"
+                                        class="form-control amenity_name "  placeholder="Amenity Name">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-envelope"></span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row" style="padding-bottom:1rem">
                                     <!-- /.col -->
@@ -81,7 +118,7 @@
         //  start ajax syntax with a function()
         $(function() {
             //  getting the original table and replace it with yajra DataTable({json data});
-            yTable = $('#y_table').DataTable({
+            yTable = $('#yTable').DataTable({
                 //  default data for all columns
                 columnDefs: [{
                     'defaultContent': '-',
@@ -132,7 +169,81 @@
 
 <script>
     $(document).ready(function() {
-          
+        //  amenity store ajax request
+          $('body').on('submit', '#amenityStore', function(e) {
+              e.preventDefault();
+              let get_route = $(this).attr('action');
+              let form_data = new FormData($(this)[0]);
+              $.ajax({
+                  url:get_route,
+                  type:'POST',
+                  data:form_data,
+                  processData: false,
+                  contentType: false,
+                  success:function(response){
+                     toastr.success(response.success);
+                     $('#amenityStore')[0].reset();
+                     // reload table using yajra datatable
+                     yTable.ajax.reload();
+                    $('.btn-close').trigger('click');
+                  },
+                  error:function(xhr,status,failed){
+                      let errors = xhr.responseJSON.errors;
+                      $.each(errors, function(key, value){
+                         toastr.error(value[0]);
+                      });
+                  },
+              });
+          });
+
+          //  amenity edit ajax request
+          $('body').on('click', '.edit', function(e) {
+              e.preventDefault();
+              let get_id = $(this).data('id');
+              $.ajax({
+                  url:"{{ route('amenity.edit') }}",
+                  type:'GET',
+                  data:{
+                      id:get_id
+                  },
+                  success:function(response){
+                     $('.amenity_name').val(response.amenity_name);
+                     $("#up_id").val(response.id);
+                  },
+                  error:function(xhr,status,failed){
+                      let errors = xhr.responseJSON.errors;
+                      $.each(errors, function(key, value){
+                         toastr.error(value[0]);
+                      });
+                  },
+              });
+          });
+
+          //  amenity update ajax request
+          $('body').on('submit', '#amenityUpdate', function(e) {
+              e.preventDefault();
+              let get_route = $(this).attr('action');
+              let form_data = new FormData($(this)[0]);
+              $.ajax({
+                  url:get_route,
+                  type:'POST',
+                  data:form_data,
+                  processData: false,
+                  contentType: false,
+                  success:function(response){
+                     toastr.success(response.success);
+                     // reload table using yajra datatable
+                     yTable.ajax.reload();
+                    $('.btn-close').trigger('click');
+                  },
+                  error:function(xhr,status,failed){
+                      let errors = xhr.responseJSON.errors;
+                      $.each(errors, function(key, value){
+                         toastr.error(value[0]);
+                      });
+                  },
+              });
+          });
     });
 </script>
 @endpush

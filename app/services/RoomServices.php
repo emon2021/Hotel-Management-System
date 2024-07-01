@@ -1,5 +1,6 @@
 <?php
 namespace App\services;
+
 use App\Models\RoomCategory;
 use Illuminate\Support\Str;
 
