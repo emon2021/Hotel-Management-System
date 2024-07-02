@@ -351,29 +351,29 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         //       });
         //   });
 
-        //   //    change amenity status
-        //   $('body').on('click', '.amenityStatus', function(e) {
-        //       e.preventDefault();
-        //       let get_id = $(this).data('id');
-        //       $.ajax({
-        //           url:"{{ route('amenity.status') }}",
-        //           type:'GET',
-        //           data:{
-        //               id:get_id,
-        //           },
-        //           success:function(response){
-        //              toastr.success(response.success);
-        //              // reload table using yajra datatable
-        //              yTable.ajax.reload();
-        //           },
-        //           error:function(xhr,status,failed){
-        //               let errors = xhr.responseJSON.errors;
-        //               $.each(errors, function(key, value){
-        //                  toastr.error(value[0]);
-        //               });
-        //           },
-        //       });
-        //   });
+          //    change amenity status
+          $('body').on('click', '.featured', function(e) {
+              e.preventDefault();
+              let get_id = $(this).data('id');
+              $.ajax({
+                  url:"{{ route('room.status') }}",
+                  type:'GET',
+                  data:{
+                      id:get_id,
+                  },
+                  success:function(response){
+                     toastr.success(response.success);
+                     // reload table using yajra datatable
+                     yTable.ajax.reload();
+                  },
+                  error:function(xhr,status,failed){
+                      let errors = xhr.responseJSON.errors;
+                      $.each(errors, function(key, value){
+                         toastr.error(value[0]);
+                      });
+                  },
+              });
+          });
     });
 </script>
 @endpush

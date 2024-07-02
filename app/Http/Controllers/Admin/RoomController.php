@@ -52,4 +52,14 @@ class RoomController extends Controller
         RoomServices::roomStore($request);
         return response()->json(['success' => 'Room Added Successfully.']);
     }
+
+    //  featured or not
+    public function statusUpdate(Request $request)
+    {
+        RoomServices::roomStatus($request);
+        return response()->json(["success" => "Feature Status Changed Successfully"]);
+    }
+
+    //  room.edit 
+    
 }

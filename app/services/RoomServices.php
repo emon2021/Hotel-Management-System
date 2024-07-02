@@ -17,4 +17,22 @@ class RoomServices
             'room_rent' => $request->room_rent,
         ]);
     }
+
+    //  room featured changed
+    public static function roomStatus($request)
+    {
+        $featured = Room::findOrFail($request->id);
+        if($featured->featured == 1)
+        {
+            $featured->update([
+                'featured' => 0,
+            ]);
+        }else{
+            $featured->update([
+                'featured' => 1,
+            ]);
+        }
+        return $featured;
+    }
+   
 }
