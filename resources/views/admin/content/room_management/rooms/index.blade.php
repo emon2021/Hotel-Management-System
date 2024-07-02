@@ -120,31 +120,11 @@
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Amenity</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Update Room</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <form action="{{ route('amenity.update') }}" id="amenityUpdate" method="post">
-                                @csrf
-                                <div class="input-group mb-3">
-                                    <input type="hidden" value="" id="up_id" name="id">
-                                    <input type="text" value="" name="amenity_name"
-                                        class="form-control amenity_name "  placeholder="Amenity Name">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-envelope"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row" style="padding-bottom:1rem">
-                                    <!-- /.col -->
-                                    <div class="col-8"></div>
-                                    <div class="col-4">
-                                        <button type="submit" class="btn btn-primary btn-block" style="width: 8.7rem; margin-right:0.2rem">UPDATE</button>
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                            </form>
+                        <div id="modal_body">
+
                         </div>
                     </div>
                     </div>
@@ -270,54 +250,53 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
               });
           });
 
-        //   //  amenity edit ajax request
-        //   $('body').on('click', '.edit', function(e) {
-        //       e.preventDefault();
-        //       let get_id = $(this).data('id');
-        //       $.ajax({
-        //           url:"{{ route('amenity.edit') }}",
-        //           type:'GET',
-        //           data:{
-        //               id:get_id
-        //           },
-        //           success:function(response){
-        //              $('.amenity_name').val(response.amenity_name);
-        //              $("#up_id").val(response.id);
-        //           },
-        //           error:function(xhr,status,failed){
-        //               let errors = xhr.responseJSON.errors;
-        //               $.each(errors, function(key, value){
-        //                  toastr.error(value[0]);
-        //               });
-        //           },
-        //       });
-        //   });
+          //  room edit ajax request
+          $('body').on('click', '.edit', function(e) {
+              e.preventDefault();
+              let get_id = $(this).data('id');
+              $.ajax({
+                  url:"{{ route('room.edit') }}",
+                  type:'GET',
+                  data:{
+                      id:get_id
+                  },
+                  success:function(response){
+                     $('#modal_body').html(response);
+                  },
+                  error:function(xhr,status,failed){
+                      let errors = xhr.responseJSON.errors;
+                      $.each(errors, function(key, value){
+                         toastr.error(value[0]);
+                      });
+                  },
+              });
+          });
 
         //    amenity update ajax request
-        //   $('body').on('submit', '#amenityUpdate', function(e) {
-        //       e.preventDefault();
-        //       let get_route = $(this).attr('action');
-        //       let form_data = new FormData($(this)[0]);
-        //       $.ajax({
-        //           url:get_route,
-        //           type:'POST',
-        //           data:form_data,
-        //           processData: false,
-        //           contentType: false,
-        //           success:function(response){
-        //              toastr.success(response.success);
-        //              // reload table using yajra datatable
-        //              yTable.ajax.reload();
-        //             $('.btn-close').trigger('click');
-        //           },
-        //           error:function(xhr,status,failed){
-        //               let errors = xhr.responseJSON.errors;
-        //               $.each(errors, function(key, value){
-        //                  toastr.error(value[0]);
-        //               });
-        //           },
-        //       });
-        //   });
+          $('body').on('submit', '#roomUpdate', function(e) {
+              e.preventDefault();
+              let get_route = $(this).attr('action');
+              let form_data = new FormData($(this)[0]);
+              $.ajax({
+                  url:get_route,
+                  type:'POST',
+                  data:form_data,
+                  processData: false,
+                  contentType: false,
+                  success:function(response){
+                     toastr.success(response.success);
+                     // reload table using yajra datatable
+                     yTable.ajax.reload();
+                    $('.btn-close').trigger('click');
+                  },
+                  error:function(xhr,status,failed){
+                      let errors = xhr.responseJSON.errors;
+                      $.each(errors, function(key, value){
+                         toastr.error(value[0]);
+                      });
+                  },
+              });
+          });
 
         //   //    amenity delete ajax request
         //   $('body').on('click', '#delete_data', function(e) {

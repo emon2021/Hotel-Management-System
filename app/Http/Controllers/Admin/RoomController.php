@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoomRequest;
+use App\Http\Requests\RoomUpdateRequest;
 use Illuminate\Http\Request;
 use App\Services\RoomServices;
 use Yajra\DataTables\DataTables;
 use App\Models\Room;
 use App\Models\RoomCategory;
+use Illuminate\Support\Facades\Redis;
 
 class RoomController extends Controller
 {
@@ -61,5 +63,20 @@ class RoomController extends Controller
     }
 
     //  room.edit 
-    
+    public function edit(Request $request)
+    {
+        RoomServices::roomEdit($request);
+        $data = RoomServices::$data;
+        return view('admin.content.room_management.rooms.edit',$data);
+    }
+
+    //  room.update
+    public function update(RoomUpdateRequest $request)
+    {
+        $request->validated();
+        RoomServices::roomUpdate($request);
+        return response()->json([
+            'success' => 'Room Updated Successfully',
+        ]);
+    }
 }
