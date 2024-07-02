@@ -59,11 +59,11 @@ Route::controller(\App\Http\Controllers\Admin\AmenityController::class)->middlew
     Route::get('rooms/amenities/status', 'statusUpdate')->name('amenity.status');
 });
 //_________Room.Controller___________
-Route::controller(\App\Http\Controllers\Admin\AmenityController::class)->middleware(['auth','is_admin'])->group(function(){
-    Route::get('rooms/index', 'index')->name('amenity.index');
-    // Route::post('rooms/store', 'store')->name('amenity.store');
-    // Route::get('rooms/edit', 'edit')->name('amenity.edit');
-    // Route::post('/rooms/update', 'update')->name('amenity.update');
-    // Route::delete('/rooms/destroy/{id}', 'destroy')->name('amenity.destroy');
-    // Route::get('rooms/status', 'statusUpdate')->name('amenity.status');
+Route::controller(\App\Http\Controllers\Admin\RoomController::class)->middleware(['auth','is_admin'])->group(function(){
+    Route::get('rooms/index', 'index')->name('room.index');
+    // Route::post('rooms/store', 'store')->name('room.store');
+    // Route::get('rooms/edit', 'edit')->name('room.edit');
+    // Route::post('/rooms/update', 'update')->name('room.update');
+    // Route::delete('/rooms/destroy/{id}', 'destroy')->name('room.destroy');
+    // Route::get('rooms/status', 'statusUpdate')->name('room.status');
 });

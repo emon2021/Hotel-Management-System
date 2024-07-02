@@ -5,110 +5,40 @@
         <title>Admin|HMS|Rooms</title>
     @endpush
     <div class="container float-end" style="float:right;width:82%">
-        <div class="row overflow-hidden">
-            <div class="col-md-12 col-lg-12 col-xl-12">
-                <table id="yTable" class="table table-striped text-center">
-                    <thead>
-                        <tr>
-                            
-                                <h3 class="table-caption text-center bg-dark text-light p-2">Rooms</h3>
-                            
-                        </tr>
-                        <a href="#" class="btn btn-primary float-end mx-5 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Add  &nbsp;&nbsp; +</a>
-                    <tr>
-                        <th >SL</th>
-                        <th >Title</th>
-                        <th >Category</th>
-                        <th >Rent</th>
-                        <th >Featured</th>
-                        <th >Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-
-                {{-- add amenity modal --}}
-  
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Amenity</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('amenity.store') }}" id="amenityStore" method="post">
-                                @csrf
-                                <div class="input-group mb-3">
-                                    <input type="hidden" id="id" name="id">
-                                    <input type="text" name="amenity_name"
-                                        class="form-control cat_name @error('amenity_name') is-invalid @enderror"  placeholder="Amenity Name">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-envelope"></span>
-                                        </div>
-                                    </div>
-                                    @error('amenity_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="row" style="padding-bottom:1rem">
-                                    <!-- /.col -->
-                                    <div class="col-8"></div>
-                                    <div class="col-4">
-                                        <button type="submit" class="btn btn-primary btn-block" style="width: 8.7rem; margin-right:0.2rem">ADD</button>
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                {{-- edit amenity modal --}}
-  
-                <!-- Modal -->
-                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Amenity</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('amenity.update') }}" id="amenityUpdate" method="post">
-                                @csrf
-                                <div class="input-group mb-3">
-                                    <input type="hidden" value="" id="up_id" name="id">
-                                    <input type="text" value="" name="amenity_name"
-                                        class="form-control amenity_name "  placeholder="Amenity Name">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-envelope"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row" style="padding-bottom:1rem">
-                                    <!-- /.col -->
-                                    <div class="col-8"></div>
-                                    <div class="col-4">
-                                        <button type="submit" class="btn btn-primary btn-block" style="width: 8.7rem; margin-right:0.2rem">UPDATE</button>
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
+        <div class="row">
+            <div class="col-md-6 float-start">
+                <h3>Rooms</h3>
             </div>
+            <div class="col-md-6 float-end">
+                <a href="#" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">+  &nbsp;&nbsp; Add  </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">All Room List Here...</h3>
+                    </div>
+                    <div class="card-body">
 
+                        <table id="yTable" class="table table-striped text-center">
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Featured</th>
+                                    <th>Rent</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -144,7 +74,7 @@
                 "searching": true,
                 //  getting the route using ajax and declare request type
                 "ajax": {
-                    "url": "{{ route('amenity.index') }}",
+                    "url": "{{ route('room.index') }}",
                     "type": 'GET',
                 },
                 //  push data to all the table columns
@@ -155,12 +85,20 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'amenity_name',
-                        name: 'amenity_name'
+                        data: 'room_title',
+                        name: 'room_title'
                     },
                     {
-                        data: 'amenity_status',
-                        name: 'amenity_status',
+                        data: 'category_id',
+                        name: 'category_id',
+                    },
+                    {
+                        data: 'featured',
+                        name: 'featured',
+                    },
+                    {
+                        data: 'room_rent',
+                        name: 'room_rent',
                     },
                     //  here added orderable and searchable property to make table orderable and searchable
                     {
@@ -180,7 +118,7 @@
 
 <!---------- -/ End of Page specific scripts ---------->
 
-<script>
+{{-- <script>
     $(document).ready(function() {
         //  amenity store ajax request
           $('body').on('submit', '#amenityStore', function(e) {
@@ -314,5 +252,5 @@
               });
           });
     });
-</script>
+</script> --}}
 @endpush
