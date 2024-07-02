@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RoomRequest;
 use Illuminate\Http\Request;
 use App\Services\RoomServices;
 use Yajra\DataTables\DataTables;
 use App\Models\Room;
+use App\Models\RoomCategory;
 
 class RoomController extends Controller
 {
@@ -39,6 +41,15 @@ class RoomController extends Controller
                 ->addIndexColumn()
                 ->make(true);
         }
-        return view('admin.content.room_management.rooms.index');
+        $data['categories'] = RoomCategory::select('id','category_name')->get();
+        return view('admin.content.room_management.rooms.index',$data);
+    }
+
+    //  store
+    public function store(RoomRequest $request)
+    {
+        $request->validated();
+        RoomServices::roomStore($request);
+        return response()->json(['success' => 'Room Added Successfully.']);
     }
 }

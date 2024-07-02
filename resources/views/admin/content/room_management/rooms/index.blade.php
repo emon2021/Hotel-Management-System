@@ -61,19 +61,42 @@
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Amenity</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Add Rooms</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('amenity.store') }}" id="amenityStore" method="post">
+                            <form action="{{ route('room.store') }}" id="roomStore" method="post">
                                 @csrf
                                 <div class="input-group mb-3">
-                                    <input type="hidden" id="id" name="id">
-                                    <input type="text" name="amenity_name"
-                                        class="form-control cat_name "  placeholder="Amenity Name">
+                                   
+                                    <input type="text" name="room_title"
+                                        class="form-control cat_name "  placeholder="Room Title">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-envelope"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                   
+                                    <select name="cat_id" class="form-control" id="">
+                                        <option value="">Select Category</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-bars"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                   
+                                    <input type="number" name="room_rent" placeholder="Room Rent" class="form-control">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-credit-card"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -218,10 +241,10 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!---------- -/ End of Page specific scripts ---------->
 
-{{-- <script>
+<script>
     $(document).ready(function() {
-        //  amenity store ajax request
-          $('body').on('submit', '#amenityStore', function(e) {
+        //  romm store ajax request
+          $('body').on('submit', '#roomStore', function(e) {
               e.preventDefault();
               let get_route = $(this).attr('action');
               let form_data = new FormData($(this)[0]);
@@ -233,7 +256,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                   contentType: false,
                   success:function(response){
                      toastr.success(response.success);
-                     $('#amenityStore')[0].reset();
+                     $('#roomStore')[0].reset();
                      // reload table using yajra datatable
                      yTable.ajax.reload();
                     $('.btn-close').trigger('click');
@@ -247,110 +270,110 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
               });
           });
 
-          //  amenity edit ajax request
-          $('body').on('click', '.edit', function(e) {
-              e.preventDefault();
-              let get_id = $(this).data('id');
-              $.ajax({
-                  url:"{{ route('amenity.edit') }}",
-                  type:'GET',
-                  data:{
-                      id:get_id
-                  },
-                  success:function(response){
-                     $('.amenity_name').val(response.amenity_name);
-                     $("#up_id").val(response.id);
-                  },
-                  error:function(xhr,status,failed){
-                      let errors = xhr.responseJSON.errors;
-                      $.each(errors, function(key, value){
-                         toastr.error(value[0]);
-                      });
-                  },
-              });
-          });
+        //   //  amenity edit ajax request
+        //   $('body').on('click', '.edit', function(e) {
+        //       e.preventDefault();
+        //       let get_id = $(this).data('id');
+        //       $.ajax({
+        //           url:"{{ route('amenity.edit') }}",
+        //           type:'GET',
+        //           data:{
+        //               id:get_id
+        //           },
+        //           success:function(response){
+        //              $('.amenity_name').val(response.amenity_name);
+        //              $("#up_id").val(response.id);
+        //           },
+        //           error:function(xhr,status,failed){
+        //               let errors = xhr.responseJSON.errors;
+        //               $.each(errors, function(key, value){
+        //                  toastr.error(value[0]);
+        //               });
+        //           },
+        //       });
+        //   });
 
-          //  amenity update ajax request
-          $('body').on('submit', '#amenityUpdate', function(e) {
-              e.preventDefault();
-              let get_route = $(this).attr('action');
-              let form_data = new FormData($(this)[0]);
-              $.ajax({
-                  url:get_route,
-                  type:'POST',
-                  data:form_data,
-                  processData: false,
-                  contentType: false,
-                  success:function(response){
-                     toastr.success(response.success);
-                     // reload table using yajra datatable
-                     yTable.ajax.reload();
-                    $('.btn-close').trigger('click');
-                  },
-                  error:function(xhr,status,failed){
-                      let errors = xhr.responseJSON.errors;
-                      $.each(errors, function(key, value){
-                         toastr.error(value[0]);
-                      });
-                  },
-              });
-          });
+        //    amenity update ajax request
+        //   $('body').on('submit', '#amenityUpdate', function(e) {
+        //       e.preventDefault();
+        //       let get_route = $(this).attr('action');
+        //       let form_data = new FormData($(this)[0]);
+        //       $.ajax({
+        //           url:get_route,
+        //           type:'POST',
+        //           data:form_data,
+        //           processData: false,
+        //           contentType: false,
+        //           success:function(response){
+        //              toastr.success(response.success);
+        //              // reload table using yajra datatable
+        //              yTable.ajax.reload();
+        //             $('.btn-close').trigger('click');
+        //           },
+        //           error:function(xhr,status,failed){
+        //               let errors = xhr.responseJSON.errors;
+        //               $.each(errors, function(key, value){
+        //                  toastr.error(value[0]);
+        //               });
+        //           },
+        //       });
+        //   });
 
-          //    amenity delete ajax request
-          $('body').on('click', '#delete_data', function(e) {
-              e.preventDefault();
-              let get_route = $(this).attr('href');
-              let set_route = $('#delete').attr('action', get_route);
-              $('#delete').submit();     
-          });
-          // handle form for deleting
-          $('#delete').submit(function(event){
-              event.preventDefault();
-              let get_route = $(this).attr('action');
-              let form_data = new FormData($(this)[0]);
-              $.ajax({
-                  url:get_route,
-                  type:'post',
-                  data:form_data,
-                  processData: false,
-                  contentType: false,
-                  success:function(response){
-                     toastr.success(response.success);
-                     // reloading table
-                     yTable.ajax.reload();
-                  },
-                  error:function(xhr,status,failed){
-                      let errors = xhr.responseJSON.errors;
-                      $.each(errors, function(key, value){
-                         toastr.error(value[0]);
-                      });
-                  },
-              });
-          });
+        //   //    amenity delete ajax request
+        //   $('body').on('click', '#delete_data', function(e) {
+        //       e.preventDefault();
+        //       let get_route = $(this).attr('href');
+        //       let set_route = $('#delete').attr('action', get_route);
+        //       $('#delete').submit();     
+        //   });
+        //   // handle form for deleting
+        //   $('#delete').submit(function(event){
+        //       event.preventDefault();
+        //       let get_route = $(this).attr('action');
+        //       let form_data = new FormData($(this)[0]);
+        //       $.ajax({
+        //           url:get_route,
+        //           type:'post',
+        //           data:form_data,
+        //           processData: false,
+        //           contentType: false,
+        //           success:function(response){
+        //              toastr.success(response.success);
+        //              // reloading table
+        //              yTable.ajax.reload();
+        //           },
+        //           error:function(xhr,status,failed){
+        //               let errors = xhr.responseJSON.errors;
+        //               $.each(errors, function(key, value){
+        //                  toastr.error(value[0]);
+        //               });
+        //           },
+        //       });
+        //   });
 
-          //    change amenity status
-          $('body').on('click', '.amenityStatus', function(e) {
-              e.preventDefault();
-              let get_id = $(this).data('id');
-              $.ajax({
-                  url:"{{ route('amenity.status') }}",
-                  type:'GET',
-                  data:{
-                      id:get_id,
-                  },
-                  success:function(response){
-                     toastr.success(response.success);
-                     // reload table using yajra datatable
-                     yTable.ajax.reload();
-                  },
-                  error:function(xhr,status,failed){
-                      let errors = xhr.responseJSON.errors;
-                      $.each(errors, function(key, value){
-                         toastr.error(value[0]);
-                      });
-                  },
-              });
-          });
+        //   //    change amenity status
+        //   $('body').on('click', '.amenityStatus', function(e) {
+        //       e.preventDefault();
+        //       let get_id = $(this).data('id');
+        //       $.ajax({
+        //           url:"{{ route('amenity.status') }}",
+        //           type:'GET',
+        //           data:{
+        //               id:get_id,
+        //           },
+        //           success:function(response){
+        //              toastr.success(response.success);
+        //              // reload table using yajra datatable
+        //              yTable.ajax.reload();
+        //           },
+        //           error:function(xhr,status,failed){
+        //               let errors = xhr.responseJSON.errors;
+        //               $.each(errors, function(key, value){
+        //                  toastr.error(value[0]);
+        //               });
+        //           },
+        //       });
+        //   });
     });
-</script> --}}
+</script>
 @endpush
