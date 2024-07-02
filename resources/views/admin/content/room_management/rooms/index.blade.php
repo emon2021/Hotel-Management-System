@@ -1,6 +1,23 @@
 @extends('layouts.admin')
 
 @section('admin_content')
+@push('css')
+        {{-- ---------next and previous button custom css--------- --}}
+        <style>
+            .paginate_button {
+                background: #0069d9;
+                color: white;
+                padding: 10px;
+                margin: 0.40rem;
+                border-radius: 0.25rem;
+            }
+        </style>
+        {{-- ---Yajra DataTable css link---- --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap.min.css"
+            integrity="sha512-BMbq2It2D3J17/C7aRklzOODG1IQ3+MHw3ifzBHMBwGO/0yUqYmsStgBjI0z5EYlaDEFnvYV7gNYdD3vFLRKsA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+       
+    @endpush
     @push('title')
         <title>Admin|HMS|Rooms</title>
     @endpush
@@ -36,6 +53,80 @@
                                 
                             </tbody>
                         </table>
+
+                        {{-- add amenity modal --}}
+  
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Amenity</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('amenity.store') }}" id="amenityStore" method="post">
+                                @csrf
+                                <div class="input-group mb-3">
+                                    <input type="hidden" id="id" name="id">
+                                    <input type="text" name="amenity_name"
+                                        class="form-control cat_name "  placeholder="Amenity Name">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-envelope"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-bottom:1rem">
+                                    <!-- /.col -->
+                                    <div class="col-8"></div>
+                                    <div class="col-4">
+                                        <button type="submit" class="btn btn-primary btn-block" style="width: 8.7rem; margin-right:0.2rem">ADD</button>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {{-- edit amenity modal --}}
+  
+                <!-- Modal -->
+                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Amenity</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('amenity.update') }}" id="amenityUpdate" method="post">
+                                @csrf
+                                <div class="input-group mb-3">
+                                    <input type="hidden" value="" id="up_id" name="id">
+                                    <input type="text" value="" name="amenity_name"
+                                        class="form-control amenity_name "  placeholder="Amenity Name">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-envelope"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-bottom:1rem">
+                                    <!-- /.col -->
+                                    <div class="col-8"></div>
+                                    <div class="col-4">
+                                        <button type="submit" class="btn btn-primary btn-block" style="width: 8.7rem; margin-right:0.2rem">UPDATE</button>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
                     </div>
                 </div>
             </div>
@@ -53,7 +144,16 @@
 <!----------Page specific scripts ---------->
 @push('scripts')
 
-
+{{-- ------Yajra DataTable js script link------- --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Include DataTables JS -->
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<!-- Include DataTables Buttons JS -->
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
 
 
 <script>

@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/blog-post',[HomeController::class, 'demo'])->name('login');
+// Route::get('/blog-post',[HomeController::class, 'demo'])->name('login');

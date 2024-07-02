@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="{{asset('public/backend')}}/plugins/summernote/summernote-bs4.min.css">
   <!-- toastr -->
   <link rel="stylesheet" href="{{asset('public/backend')}}/plugins/toastr/toastr.min.css">
+  @stack('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
