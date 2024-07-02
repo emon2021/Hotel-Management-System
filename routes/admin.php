@@ -39,8 +39,8 @@ Route::controller(\App\Http\Controllers\Admin\FoodCategoryController::class)->mi
     // Route::post('/admin/food/category/delete/{id}', 'destroy')->name('admin.food.category.delete');
 });
 
-//_________Food.Category.Controller___________
-Route::controller(\App\Http\Controllers\Admin\RoomController::class)->middleware(['auth','is_admin'])->group(function(){
+//_________Room.Category.Controller___________
+Route::controller(\App\Http\Controllers\Admin\RoomCategoryController::class)->middleware(['auth','is_admin'])->group(function(){
     Route::get('/admin/rooms/category', 'index')->name('admin.rooms.category.index');
     Route::get('/admin/rooms/category/create', 'create')->name('admin.rooms.category.create');
     Route::post('/admin/rooms/category/store', 'store')->name('admin.rooms.category.store');
@@ -57,4 +57,13 @@ Route::controller(\App\Http\Controllers\Admin\AmenityController::class)->middlew
     Route::post('/rooms/amenities/update', 'update')->name('amenity.update');
     Route::delete('/rooms/amenities/destroy/{id}', 'destroy')->name('amenity.destroy');
     Route::get('rooms/amenities/status', 'statusUpdate')->name('amenity.status');
+});
+//_________Room.Controller___________
+Route::controller(\App\Http\Controllers\Admin\AmenityController::class)->middleware(['auth','is_admin'])->group(function(){
+    Route::get('rooms/index', 'index')->name('amenity.index');
+    // Route::post('rooms/store', 'store')->name('amenity.store');
+    // Route::get('rooms/edit', 'edit')->name('amenity.edit');
+    // Route::post('/rooms/update', 'update')->name('amenity.update');
+    // Route::delete('/rooms/destroy/{id}', 'destroy')->name('amenity.destroy');
+    // Route::get('rooms/status', 'statusUpdate')->name('amenity.status');
 });

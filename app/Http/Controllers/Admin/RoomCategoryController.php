@@ -8,7 +8,7 @@ use App\Http\Requests\RoomCategoryUpdateRequest;
 use App\services\RoomServices;
 use Illuminate\Http\Request;
 
-class RoomController extends Controller
+class RoomCategoryController extends Controller
 {
     /**
      * This is for Rooms Management.

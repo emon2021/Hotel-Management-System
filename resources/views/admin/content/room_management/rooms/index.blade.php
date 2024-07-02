@@ -2,7 +2,7 @@
 
 @section('admin_content')
     @push('title')
-        <title>Admin|HMS|Amenities</title>
+        <title>Admin|HMS|Rooms</title>
     @endpush
     <div class="container float-end" style="float:right;width:82%">
         <div class="row overflow-hidden">
@@ -11,14 +11,16 @@
                     <thead>
                         <tr>
                             
-                                <h3 class="table-caption text-center bg-dark text-light p-2">Amenities</h3>
+                                <h3 class="table-caption text-center bg-dark text-light p-2">Rooms</h3>
                             
                         </tr>
                         <a href="#" class="btn btn-primary float-end mx-5 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Add  &nbsp;&nbsp; +</a>
                     <tr>
                         <th >SL</th>
-                        <th >Amenity Name</th>
-                        <th >Amenity Status</th>
+                        <th >Title</th>
+                        <th >Category</th>
+                        <th >Rent</th>
+                        <th >Featured</th>
                         <th >Action</th>
                     </tr>
                     </thead>
@@ -120,6 +122,7 @@
 
 <!----------Page specific scripts ---------->
 @push('scripts')
+
 
 
 

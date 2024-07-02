@@ -101,6 +101,12 @@ class HomeController extends Controller
         }
     }
 
+    //  demo method 
+    public function demo()
+    {
+        return 0;
+    }
+
 
 
 
