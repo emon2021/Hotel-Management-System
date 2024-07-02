@@ -1,10 +1,10 @@
 <?php
-namespace App\services;
+namespace App\Services;
 
 use App\Models\RoomCategory;
 use Illuminate\Support\Str;
 
-class RoomServices
+class RoomCategoryServices
 {
     // rooms.category.store
     public static function roomCatStore($request)

@@ -8,7 +8,7 @@ use App\Http\Requests\AmenityUpdateRequest;
 use App\Models\RoomAmenity;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use App\services\AmenityServices;
+use App\Services\AmenityServices;
 
 class AmenityController extends Controller
 {
