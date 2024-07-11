@@ -298,37 +298,37 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
               });
           });
 
-        //   //    amenity delete ajax request
-        //   $('body').on('click', '#delete_data', function(e) {
-        //       e.preventDefault();
-        //       let get_route = $(this).attr('href');
-        //       let set_route = $('#delete').attr('action', get_route);
-        //       $('#delete').submit();     
-        //   });
-        //   // handle form for deleting
-        //   $('#delete').submit(function(event){
-        //       event.preventDefault();
-        //       let get_route = $(this).attr('action');
-        //       let form_data = new FormData($(this)[0]);
-        //       $.ajax({
-        //           url:get_route,
-        //           type:'post',
-        //           data:form_data,
-        //           processData: false,
-        //           contentType: false,
-        //           success:function(response){
-        //              toastr.success(response.success);
-        //              // reloading table
-        //              yTable.ajax.reload();
-        //           },
-        //           error:function(xhr,status,failed){
-        //               let errors = xhr.responseJSON.errors;
-        //               $.each(errors, function(key, value){
-        //                  toastr.error(value[0]);
-        //               });
-        //           },
-        //       });
-        //   });
+          //    amenity delete ajax request
+          $('body').on('click', '#delete_data', function(e) {
+              e.preventDefault();
+              let get_route = $(this).attr('href');
+              let set_route = $('#delete').attr('action', get_route);
+              $('#delete').submit();     
+          });
+          // handle form for deleting
+          $('#delete').submit(function(event){
+              event.preventDefault();
+              let get_route = $(this).attr('action');
+              let form_data = new FormData($(this)[0]);
+              $.ajax({
+                  url:get_route,
+                  type:'post',
+                  data:form_data,
+                  processData: false,
+                  contentType: false,
+                  success:function(response){
+                     toastr.success(response.success);
+                     // reloading table
+                     yTable.ajax.reload();
+                  },
+                  error:function(xhr,status,failed){
+                      let errors = xhr.responseJSON.errors;
+                      $.each(errors, function(key, value){
+                         toastr.error(value[0]);
+                      });
+                  },
+              });
+          });
 
           //    change amenity status
           $('body').on('click', '.featured', function(e) {

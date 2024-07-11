@@ -56,5 +56,13 @@ class RoomServices
         ]);
         return $room;
     }
+
+    //  room.delete
+    public static function roomDestroy($id)
+    {
+        $room = Room::findOrFail($id);
+        $room->delete();
+        return $room;
+    }
    
 }

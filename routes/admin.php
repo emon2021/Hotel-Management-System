@@ -64,6 +64,6 @@ Route::controller(\App\Http\Controllers\Admin\RoomController::class)->middleware
     Route::post('rooms/store', 'store')->name('room.store');
     Route::get('rooms/edit', 'edit')->name('room.edit');
     Route::post('/rooms/update', 'update')->name('room.update');
-    // Route::delete('/rooms/destroy/{id}', 'destroy')->name('room.destroy');
+    Route::delete('/rooms/destroy/{id}', 'destroy')->name('room.destroy');
     Route::get('rooms/status', 'statusUpdate')->name('room.status');
 });
